@@ -46,7 +46,7 @@ class PersonParser {
   }
 
   get people() {
-    return {size: this._people.length}
+    return this._people
   }
 
   addPerson(newPerson) {
@@ -68,12 +68,12 @@ class PersonParser {
 
 let parser = new PersonParser('./people.csv')
 
-parser.addPerson(new Person(parser.people.size+1, 'Edi', 'Kartono', 'edi.kartono@gmail.com', '0812345678', new Date().toString()))
-
-// console.log(parser);
+parser.addPerson(new Person(parser.people.length+1, 'Eki', 'Fakhrureza', 'eki.f@gmail.com', '0812345678', new Date().toString()))
+parser.save()
+// console.log(parser.people.length);
 // console.log(parser.listPeople());
 
-parser.save()
-console.log(`There are ${parser.people.size} people in the file '${parser._file}'.`)
+
+console.log(`There are ${parser.people.length} people in the file '${parser._file}'.`)
 
 
