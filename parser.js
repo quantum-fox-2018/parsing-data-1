@@ -4,7 +4,7 @@ const fs = require('fs');
 // var arrCsv = fs.readFileSync('./people.csv','utf8');
 
 class Person {
-  // Look at the above CSV file
+  // Look giat the above CSV file
   // What attributes should a Person object have?
   constructor(id,first_name,last_name,email,phone,created_at) {
     this._id = id;
