@@ -19,7 +19,7 @@ class PersonParser {
 
   constructor(file) {
     this._file = file
-    this._people = null
+    this._people = this.listPeople()
   }
 
   listPeople(){
@@ -46,19 +46,34 @@ class PersonParser {
   }
 
   get people() {
-    return this._people
+    return {size: this._people.length}
   }
 
-  addPerson() {}
+  addPerson(newPerson) {
+    this._people.push(newPerson)
+  }
+
+  save(){
+    let listPeople = "id,first_name,last_name,email,phone,created_at"+'\n'
+
+    for(let i=0; i<this._people.length; i++){
+      listPeople += this._people[i]._id+','+this._people[i]._first_name+','+this._people[i]._last_name+','+this._people[i]._email+','+this._people[i]._phone+','+this._people[i]._created_at+'\n'
+    }
+    fs.writeFileSync(this._file, listPeople)
+    console.log(listPeople);
+    
+  }
 
 }
 
 let parser = new PersonParser('./people.csv')
 
-console.log(parser.listPeople());
+parser.addPerson(new Person(parser.people.size+1, 'Edi', 'Kartono', 'edi.kartono@gmail.com', '0812345678', new Date().toString()))
 
-// console.log(`There are ${parser.people.size} people in the file '${parser.file}'.`)
+// console.log(parser);
+// console.log(parser.listPeople());
 
-// let person = new Person(1001,'Agung','Prabowo')
-// console.log(person);
+parser.save()
+console.log(`There are ${parser.people.size} people in the file '${parser._file}'.`)
+
 
