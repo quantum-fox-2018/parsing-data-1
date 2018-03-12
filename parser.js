@@ -15,7 +15,6 @@ class PersonParser {
   constructor(file){
     this._file = file
     this._people = []
-    this._size = this.countSize()
   }
 
   get file(){
@@ -26,19 +25,11 @@ class PersonParser {
     return this._people
   }
 
-  get size(){
-    return this._size
-  }
-
-  countSize(){
-    return this.people.length
-  }
-
   addPeople(){
     for(let i=1; i<people.length-1; i++){
       let person = people[i].split(',')
       let dataInput = new Person(Number(person[0]),person[1],person[2],person[3],
-        person[4],person[5])
+        person[4],new Date(person[5]))
       this.people.push(dataInput)
     }
   }
@@ -67,9 +58,8 @@ var people = fs.readFileSync('people.csv','utf8')
   .split('\n')
 let parser = new PersonParser('people.csv')
 parser.addPeople()
-parser.countSize()
 console.log(parser)
 // parser.addPerson(new Person('201','Fitrul','Islam','fitrul.islam@gmail.com','1-444-555-6666','2014-08-12T20:52:09-07:00'))
 // parser.save();
 
-console.log(`There are ${parser.people.size} people in the file ${parser.file}.`)
+console.log(`There are ${parser.people.length} people in the file ${parser.file}.`)
