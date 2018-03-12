@@ -48,7 +48,6 @@ class PersonParser {
       stringPerson += '\n';
     }
 
-    console.log(stringPerson);
     fs.writeFileSync(this._file, stringPerson);
   }
 
