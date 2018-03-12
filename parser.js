@@ -33,12 +33,15 @@ class PersonParser {
   }
 
   addPerson(first_name, last_name, email, phone, created_at) {
-    let fs = require('fs');
     let id = this._people.length+1;
-    let stringPerson = '';
     let newPerson = new Person(id, first_name, last_name, email, phone, created_at)
 
     this._people.push(newPerson);
+  }
+
+  save() {
+    let fs = require('fs');
+    let stringPerson = '';
 
     for (let i in this._people) {
       for (let j in this._people[i]) {
@@ -86,3 +89,5 @@ parser.parser();
 parser.addPerson('Fandy', 'Barestu', 'barestu.fandy@gmail.com', '081804323001', '2018-03-12');
 
 console.log(`There are ${parser.people.size } people in the file '${parser.file}'.`)
+
+parser.save();
